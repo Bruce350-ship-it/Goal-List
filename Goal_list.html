@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Goal List</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="language" content="en">
+    <meta name="description" content="This is a Goal Tracker">
+    <meta name="author" content="Bruce Bainomugisha">
+    <meta name="keywords" content="goal list, goal, goals, list">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Montserrat:wght@400;500&family=Nunito:wght@300;400&family=Raleway:wght@400;500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="list-icon.jpg" type="image/png">
+
+    <style>
+      body {
+        background-image: url('pexels-background-2.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100% 1050%;
+        position: relative;
+      }
+
+      h1 {
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        color: #fff;
+        font-size: 42.5px;
+      }
+
+      input {
+        padding: 5.5px 5.5px 5.5px 9.5px;
+        border: none;
+        border-radius: 15px 0 0 15px;
+        font-size: 15px;
+        background: #fdfcd0;
+        box-shadow: 0 2.5px 2.5px rgba(0, 0, 0, 0.075);
+      }
+
+      input:focus {
+        outline: none;
+        background-color: #fcfbdc;
+      }
+
+      .add-item {
+        padding: 5.5px;
+        width: 45px;
+        border: none;
+        position: absolute;
+        left: 199px;
+        border-radius: 0 15px 15px 0;
+        font-size: 15px;
+        background: #ccff6e;
+        box-shadow: 0 2.5px 2.5px rgba(0, 0, 0, 0.075);
+        cursor: pointer;
+      }
+
+      .submit {
+        padding: 5.5px;
+        width: 50px;
+        border: none;
+        border-radius: 5px;
+        font-size: 12px;
+        background: #82b820;
+        color: white;
+        cursor: pointer;
+      }
+
+      li {
+        font-size: 20px;
+        font-family: 'Roboto', sans-serif;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+
+      #summary {
+        font-size: 18.5px;
+        font-family: 'Raleway', sans-serif;
+        color: #fff;
+      }
+
+      .back-home {
+        padding: 5.5px;
+        width: 225px;
+        border: none;
+        border-radius: 15px;
+        margin-top: 10px;
+        font-size: 13.5px;
+        background: #82b820;
+        color: white;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Goal List</h1>
+    <div id="everything">
+      <p style="font-family: 'Nunito', sans-serif; color: #fff;">Let's Start To Organize some Goals for Today, Shall we?</p>
+      <form>
+          <input type="text" id="item" placeholder="Add a new goal...">
+          <button class="add-item" type="button" onclick="addItem()">Add</button>
+      </form>
+      <ul id="list"></ul>
+      <button class="submit" type="button" onclick="displaySummary()">Submit</button>
+    </div>
+    
+    <p id="summary" style="display: none;"></p>
+    
+    <script>
+      var items = [];
+      
+      function addItem() {
+        // Get the input value
+        var item = document.getElementById("item").value;
+        
+        // Add the new item to the items array
+        items.push(item);
+        
+        // Create a new list item
+        var li = document.createElement("li");
+        li.innerText = item;
+        
+        // Add the new list item to the list
+        document.getElementById("list").appendChild(li);
+        
+        // Clear the input field
+        document.getElementById("item").value = "";
+      }
+      
+      function displaySummary() {
+        // Update the summary paragraph
+        var summary = "Your goals today are:<br>";
+        for (var i = 0; i < items.length; i++) {
+          summary += (i + 1) + ". " + items[i] + "<br>";
+        }
+        summary += "<br>And... because we've got so much motive and determination, we're going to make sure that we accomplish all these goals step by step!<br>";
+        document.getElementById("summary").innerHTML = summary;
+        
+        //Redesign the page
+        document.getElementById("everything").innerHTML = "";
+
+        // Show the summary paragraph
+        document.getElementById("summary").style.display = "block";
+
+        // Create a new button to go back home
+        var back = document.createElement("button");
+        back.innerText = "Let's Make More Goals, Shall We?";
+        back.className = "back-home";
+
+        // Add the new button to the summary
+        document.getElementById("summary").appendChild(back);
+
+        //Add functionality to the button
+        back.addEventListener("click", function () {
+          location.reload();
+        })
+      }
+    </script>
+  </body>
+</html>
